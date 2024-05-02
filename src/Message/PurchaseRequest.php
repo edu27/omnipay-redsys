@@ -1714,7 +1714,7 @@ class PurchaseRequest extends AbstractRequest
     {
         $this->validate('merchantId', 'terminalId', 'amount', 'currency');
 
-        return [
+        $data = [
             // mandatory fields
             'Ds_Merchant_MerchantCode'       => $this->getMerchantId(),
             'Ds_Merchant_Terminal'           => $this->getTerminalId(),
@@ -1732,6 +1732,13 @@ class PurchaseRequest extends AbstractRequest
             'Ds_Merchant_ConsumerLanguage'   => $this->getConsumerLanguage(),
             'Ds_Merchant_MerchantData'       => $this->getMerchantData(),
         ];
+
+        // If language is set correctly the value is sent
+        if(!isNull($this->getConsumerLanguage())) {
+            $data['Ds_Merchant_ConsumerLanguage'] = $this->getConsumerLanguage();
+        }
+
+        return $data;
     }
 
     public function get3DSAccountInfoData()
