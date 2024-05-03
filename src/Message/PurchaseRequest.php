@@ -1737,7 +1737,7 @@ class PurchaseRequest extends AbstractRequest
         ];
 
         // If language is set correctly the value is sent
-        if(!isNull($this->getConsumerLanguage())) {
+        if(!is_null($this->getConsumerLanguage())) {
             $data['Ds_Merchant_ConsumerLanguage'] = $this->getConsumerLanguage();
         }
 
