@@ -1443,8 +1443,8 @@ class PurchaseRequest extends AbstractRequest
      */
     public function setTransactionId($value)
     {
-        // @author: edu27 Code modified to have this transactionId format: Year Month OrderPrefix AtLeast7Numbers: 240520000001
-        $start = substr($value, 0, 7);
+        // @author: edu27 Code modified to have this transactionId with 12 numbers
+        $start = substr($value, 0, 12);
         $numerics = 0;
         foreach (str_split($start) as $char) {
             if (is_numeric($char)) {
@@ -1453,11 +1453,7 @@ class PurchaseRequest extends AbstractRequest
                 break;
             }
         }
-        $value = str_pad(substr($start, 0, $numerics), 7, 0, STR_PAD_LEFT).substr($value, $numerics);
-        $date = date('ym');
-        // @author: edu27 2 is used to avoid conflict with other Redsys order IDs that uses 1 as order prefix
-        $value = $date.'2'.$value; 
-        
+        $value = str_pad(substr($start, 0, $numerics), 12, 0, STR_PAD_LEFT).substr($value, $numerics);
         parent::setTransactionId($value);
     }
 
