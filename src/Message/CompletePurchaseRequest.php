@@ -9,7 +9,7 @@ class CompletePurchaseRequest extends PurchaseRequest
 {
     public function getData()
     {
-        return $this->httpRequest->request->all();
+        return array_merge($this->httpRequest->query->all(), $this->httpRequest->request->all());
     }
 
     public function sendData($data)
